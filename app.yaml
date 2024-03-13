@@ -1,0 +1,22 @@
+runtime: php83
+runtime_config:
+  document_root: # Specify the document root directory if needed
+handlers:
+- url: /(.+\.(gif|png|jpg|css|js|map|PNG))$
+  static_files: \1
+  upload: .+\.(gif|png|jpg|css|js|map|PNG)$
+
+- url: /.*
+  script: auto
+  # The "auto" directive will route all other requests to PHP scripts
+
+entrypoint: 
+  serve handler.php
+# Specify the main entry point of your application
+
+env_variables:
+  CLOUDSQL_USER: root
+  CLOUDSQL_DB: farmhub
+  CLOUDSQL_PASSWORD: root
+  CLOUDSQL_DSN: /cloudsql/farmhub1-417012:asia-south1:farmhub2
+# Define environment variables for your application, including database connection details
